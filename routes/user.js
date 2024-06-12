@@ -1,5 +1,6 @@
 const express = require('express')
 const router = express.Router()
+const path = require('path')
 
 // http://localhost:3000/user
 router.get('/',  (req, res) => {
@@ -7,9 +8,9 @@ router.get('/',  (req, res) => {
   });
 
 //route with a parameter
-router.get('/:username',  (req, res) => {
-  res.send(`this is ${req.params.username}'s profile and age of ${req.params.age} years old`);
-});
+// router.get('/:username/:age',  (req, res) => {
+//   res.send(`this is ${req.params.username}'s profile and age of ${req.params.age} years old`);
+// });
 
 // query parameter 
 // two params sort and theme they are key value  pair
@@ -19,12 +20,22 @@ router.get('/info', (req, res) =>{
 })
 
 // template file
-router.get('/:username/:content',  (req, res) => {
-  //res.render(`${req.params.content}`);
+router.get('/:username',  (req, res) => {
 //render methos is going to compile  the template engine (pug file)
 // to access the param render method takes second argument that is object with key value pair
-res.render('user', {username: req.params.username, content: req.params.content}) // views/user.pug b/c the view folder is specified above in the app.set('views, path ) 
+res.render('user', {username: req.params.username}) // views/user.pug b/c the view folder is specified above in the app.set('views, path ) 
 });
+
+
+// download image
+router.get('/:username/download', (req, res) =>{
+  res.download(path.resolve('./public/images/User-Profile.png'), 'User-Profile.png')
+})
+
+
+
+  
+
 
 module.exports = router
 

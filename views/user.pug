@@ -1,7 +1,17 @@
 doctype html 
 html 
     head 
+        link(rel='stylesheet', href='/style.css')
         title User Page
     body 
-        h1 #{username}'s profile Page 
-        p= content    
+        h1 #{username}'s profile Page
+        //- img(src='/images/User-Profile.png' id='proImg')
+        //- a.btn(href='#') Press
+        button(type ='button' id = 'clickButton') download image
+        script.
+            document.addEventListener('DOMContentLoaded', () => {
+                const btn = document.getElementById('clickButton');
+                btn.addEventListener('click', () => {
+                    window.location.href = `/users/#{username}/download`;
+                });
+            });

@@ -1,10 +1,13 @@
 const express = require("express") // import express
 const app = express();
-const port = 1234;
+const port = 3000;
 const path = require('path')
 const users = require('./routes/user')
 const contact = require('./routes/contact')
 
+
+app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'styles')))
 
 app.listen(port, () => {
   console.log(`Server listening on port: ${port}.`);
@@ -45,7 +48,7 @@ app.use((req, res, next) => {
 
 
 
-// use the imported roters using "use" method with the path and the variable tht was creacte when importeed
+// use the imported routers using "use" method with the path and the variable tht was creacte when importeed
 app.use('/users', users)
 app.use('/contact', contact)
 
@@ -53,6 +56,9 @@ app.get('/', (req, res) => {
   res.render('mainPage') 
 })
 
+app.post('/', (req, res) => {
+  res.send(`<h1>Welcome to home page with POST Method</h1>`) 
+})
 
 
   
